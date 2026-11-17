@@ -18,7 +18,7 @@ export function Vitrina({ piezas, aviso }: { piezas: Pieza[]; aviso?: React.Reac
         ) : (
           <div className="grilla">
             {visibles.map((pieza, i) => (
-              <Tarjeta key={pieza.id} pieza={pieza} indice={i} prioridad={i < 2} />
+              <Tarjeta key={pieza.id} pieza={pieza} prioridad={i < 2} />
             ))}
           </div>
         )}

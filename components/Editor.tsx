@@ -154,7 +154,7 @@ export function Editor({
         ) : (
           <div className="grilla">
             {visibles.map((pieza, i) => (
-              <Tarjeta key={pieza.id} pieza={pieza} indice={i} prioridad={i < 2}>
+              <Tarjeta key={pieza.id} pieza={pieza} prioridad={i < 2}>
                 <div className="acciones">
                   <button
                     className="boton boton-vendida"

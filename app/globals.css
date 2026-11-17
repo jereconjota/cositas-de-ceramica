@@ -1,17 +1,15 @@
-/* Neobrutalismo con pasteles: bordes negros gruesos, sombras duras y texto negro.
+/* Neobrutalismo en tres colores: marrón tierra, rosa y blanco.
+   Bordes gruesos y sombras duras en marrón oscuro.
    Todo pensado para leerse fácil: letra grande, mucho contraste, una columna en el celu. */
 
 :root {
-  --tinta: #111111;
-  --fondo: #fff6e9;
+  --tinta: #3a2318;      /* marrón oscuro: texto, bordes y sombras */
+  --marron: #8a5136;     /* marrón tierra: botón principal */
+  --arcilla: #f1e2d8;    /* marrón muy claro: fondo del modo tía */
+  --rosa: #f6d3d0;
+  --rosa-fuerte: #eeb4ae;
+  --fondo: #fff8f5;
   --blanco: #ffffff;
-  --rosa: #ffd6e0;
-  --menta: #c8f2dc;
-  --lila: #dcd3ff;
-  --manteca: #fff1a8;
-  --cielo: #cde8ff;
-  --durazno: #ffdcc2;
-  --rojo: #ffb3b3;
   --borde: 3px solid var(--tinta);
   --sombra: 6px 6px 0 var(--tinta);
   --sombra-chica: 4px 4px 0 var(--tinta);
@@ -120,14 +118,9 @@ a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: var(--rosa);
 }
 
-.rosa { background: var(--rosa); }
-.menta { background: var(--menta); }
-.lila { background: var(--lila); }
-.manteca { background: var(--manteca); }
-.cielo { background: var(--cielo); }
-.durazno { background: var(--durazno); }
 
 .tarjeta-foto {
   aspect-ratio: 1;
@@ -206,11 +199,12 @@ a {
 }
 
 .boton-vendida {
-  background: var(--menta);
+  background: var(--rosa-fuerte);
 }
 
 .boton-agregar {
-  background: var(--manteca);
+  background: var(--marron);
+  color: var(--blanco);
   min-height: 80px;
   font-size: 1.45rem;
 }
@@ -227,8 +221,8 @@ a {
   min-height: 100vh;
   padding-bottom: 9rem;
   /* Fondo de mesa de taller: se nota enseguida que es "su" página. */
-  background-color: #f2dfc4;
-  background-image: radial-gradient(rgba(17, 17, 17, 0.12) 1.5px, transparent 1.5px);
+  background-color: var(--arcilla);
+  background-image: radial-gradient(rgba(138, 81, 54, 0.22) 1.5px, transparent 1.5px);
   background-size: 18px 18px;
 }
 
@@ -313,7 +307,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: 20;
-  background: rgba(17, 17, 17, 0.6);
+  background: rgba(58, 35, 24, 0.6);
   overflow-y: auto;
   padding: 1rem;
   display: flex;
@@ -374,7 +368,7 @@ a {
   padding-inline: 0.9rem;
   font-size: 1.4rem;
   font-weight: 700;
-  background: var(--manteca);
+  background: var(--rosa);
   border: var(--borde);
   border-right: none;
   border-radius: var(--radio) 0 0 var(--radio);
@@ -394,7 +388,7 @@ a {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  background: var(--rojo);
+  background: var(--rosa-fuerte);
   border: var(--borde);
   border-radius: var(--radio);
   padding: 0.6rem 0.8rem;
@@ -408,12 +402,12 @@ a {
   z-index: 30;
   display: grid;
   place-items: center;
-  background: rgba(17, 17, 17, 0.6);
+  background: rgba(58, 35, 24, 0.6);
   padding: 1rem;
 }
 
 .cargando-caja {
-  background: var(--manteca);
+  background: var(--blanco);
   border: var(--borde);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
@@ -441,7 +435,7 @@ a {
   transform: translateX(-50%);
   width: min(100% - 2rem, 600px);
   z-index: 25;
-  background: var(--menta);
+  background: var(--blanco);
   border: var(--borde);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
@@ -455,7 +449,7 @@ a {
 }
 
 .aviso-error {
-  background: var(--rojo);
+  background: var(--rosa-fuerte);
 }
 
 .aviso-botones {
@@ -472,7 +466,7 @@ a {
 
 .cinta-demo {
   margin-top: 1rem;
-  background: var(--lila);
+  background: var(--blanco);
   border: 3px dashed var(--tinta);
   border-radius: var(--radio);
   padding: 0.8rem 1rem;
