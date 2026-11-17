@@ -59,7 +59,12 @@ export async function leerTienda(tienda: Tienda): Promise<Datos> {
       Date.now() - new Date(datos.actualizado).getTime() > DEMO_REINICIO_MINUTOS * 60_000;
     if (vieja) {
       const nueva = ejemplo();
-      await guardarJSON(ruta(tienda), nueva);
+      try {
+        await guardarJSON(ruta(tienda), nueva);
+      } catch (e) {
+        // Si el almacenamiento falla, la demo igual se muestra; el error queda en los logs.
+        console.error("[demo] No se pudo guardar la tienda de prueba:", e);
+      }
       return nueva;
     }
   }

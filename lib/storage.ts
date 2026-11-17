@@ -6,6 +6,12 @@ import { put, get, del } from "@vercel/blob";
 // Si hay token de Vercel Blob se usa Blob; si no, se guarda en disco (.data/)
 // para poder desarrollar y probar sin configurar nada.
 const usaBlob = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+
+if (!usaBlob && process.env.VERCEL) {
+  console.error(
+    "[storage] Falta BLOB_READ_WRITE_TOKEN: conectá un Blob store público al proyecto en Vercel (Storage → Blob).",
+  );
+}
 const CARPETA_LOCAL = path.join(process.cwd(), ".data");
 
 export async function leerJSON<T>(ruta: string): Promise<T | null> {
@@ -14,7 +20,8 @@ export async function leerJSON<T>(ruta: string): Promise<T | null> {
       const resultado = await get(ruta, { access: "public", useCache: false });
       if (!resultado || !resultado.stream) return null;
       return JSON.parse(await new Response(resultado.stream).text()) as T;
-    } catch {
+    } catch (e) {
+      console.error(`[storage] No se pudo leer ${ruta}:`, e);
       return null;
     }
   }
