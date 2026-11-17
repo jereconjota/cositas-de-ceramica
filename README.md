@@ -16,7 +16,7 @@ La página de la tía Norma. No hay panel: **la tía ve la misma página que sus
 ## Deploy en Vercel
 
 1. Subí el repo a GitHub e importalo en Vercel.
-2. **Storage → Create → Blob** (público) y conectalo al proyecto. Eso agrega `BLOB_READ_WRITE_TOKEN`.
+2. **Storage → Create → Blob** y conectalo al proyecto. Sirve tanto el sistema nuevo (`BLOB_STORE_ID`, con OIDC) como el viejo (`BLOB_READ_WRITE_TOKEN`), y tanto stores públicos como privados: el código detecta el tipo solo. Si querés forzarlo, definí `BLOB_ACCESS=public` o `private`.
 3. En **Environment Variables** agregá `TIA_TOKEN` con algo largo: `openssl rand -hex 24`.
 4. Redeploy.
 
@@ -34,7 +34,7 @@ npm install
 npm run dev
 ```
 
-Sin `BLOB_READ_WRITE_TOKEN`, todo se guarda en `.data/`. La llave local es `norma-local`:
+Sin Blob configurado, todo se guarda en `.data/`. La llave local es `norma-local`:
 http://localhost:3000/entrar?llave=norma-local
 
 ## Decisiones

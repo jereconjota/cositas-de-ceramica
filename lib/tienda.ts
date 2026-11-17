@@ -52,7 +52,15 @@ function ejemplo(): Datos {
 }
 
 export async function leerTienda(tienda: Tienda): Promise<Datos> {
-  const datos = await leerJSON<Datos>(ruta(tienda));
+  let datos: Datos | null;
+  try {
+    datos = await leerJSON<Datos>(ruta(tienda));
+  } catch (e) {
+    // En la demo un error de lectura no es grave: se vuelve a empezar.
+    if (tienda !== "demo") throw e;
+    console.error("[demo] No se pudo leer la tienda de prueba:", e);
+    datos = null;
+  }
   if (tienda === "demo") {
     const vieja =
       !datos ||
