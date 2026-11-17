@@ -5,11 +5,31 @@ import { DEMO_REINICIO_MINUTOS, HISTORIAL_MAXIMO } from "./config";
 
 const ruta = (tienda: Tienda) => `${tienda}/piezas.json`;
 
-const vacia = (): Datos => ({ piezas: [], historial: [], actualizado: new Date().toISOString() });
+// Piezas con las que arranca la página de Norma, antes de que ella cargue nada.
+const INICIALES: [string, number, string][] = [
+  ["Cocinita", 10000, "/piezas/cocinita.jpg"],
+  ["Niña jardinera", 10000, "/piezas/nena-jardinera.jpg"],
+];
+
+function armarPiezas(lista: [string, number, string][], prefijo: string, ahora: string): Pieza[] {
+  return lista.map(([titulo, precio, foto], i) => ({
+    id: `${prefijo}-${i}`,
+    titulo,
+    precio,
+    foto,
+    vendida: false,
+    creada: ahora,
+  }));
+}
+
+function inicial(): Datos {
+  const ahora = new Date().toISOString();
+  return { piezas: armarPiezas(INICIALES, "inicial", ahora), historial: [], actualizado: ahora };
+}
 
 function ejemplo(): Datos {
   const ahora = new Date().toISOString();
-  const piezas: [string, number, string][] = [
+  const ilustraciones: [string, number, string][] = [
     ["Taza celeste con asa grande", 12000, "taza"],
     ["Bowl rosado para el desayuno", 9500, "bowl"],
     ["Florero alto verde agua", 21000, "florero"],
@@ -18,14 +38,14 @@ function ejemplo(): Datos {
     ["Maceta lila con platito", 16500, "maceta"],
   ];
   return {
-    piezas: piezas.map(([titulo, precio, foto], i) => ({
-      id: `ejemplo-${i}`,
-      titulo,
-      precio,
-      foto: `/demo/${foto}.svg`,
-      vendida: false,
-      creada: ahora,
-    })),
+    piezas: [
+      ...armarPiezas(INICIALES, "inicial", ahora),
+      ...armarPiezas(
+        ilustraciones.map(([t, p, f]) => [t, p, `/demo/${f}.svg`]),
+        "ejemplo",
+        ahora,
+      ),
+    ],
     historial: [{ fecha: ahora, texto: "Se cargó la tienda de prueba" }],
     actualizado: ahora,
   };
@@ -43,7 +63,7 @@ export async function leerTienda(tienda: Tienda): Promise<Datos> {
       return nueva;
     }
   }
-  return datos ?? vacia();
+  return datos ?? inicial();
 }
 
 export async function reiniciarDemo() {

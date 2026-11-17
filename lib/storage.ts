@@ -59,8 +59,8 @@ export async function guardarFoto(carpeta: string, archivo: File): Promise<strin
 }
 
 export async function borrarFoto(url: string) {
-  // Las fotos de ejemplo de la demo viven en /public y no se borran.
-  if (url.startsWith("/demo/")) return;
+  // Las fotos que vienen con el proyecto viven en /public y no se borran.
+  if (url.startsWith("/demo/") || url.startsWith("/piezas/")) return;
   try {
     if (usaBlob) {
       await del(url);
