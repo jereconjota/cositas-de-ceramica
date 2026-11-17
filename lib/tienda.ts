@@ -1,7 +1,7 @@
 import "server-only";
 import type { Datos, Pieza, Tienda } from "./types";
 import { leerJSON, guardarJSON } from "./storage";
-import { DEMO_REINICIO_MINUTOS, HISTORIAL_MAXIMO } from "./config";
+import { HISTORIAL_MAXIMO } from "./config";
 
 const ruta = (tienda: Tienda) => `${tienda}/piezas.json`;
 
@@ -27,60 +27,8 @@ function inicial(): Datos {
   return { piezas: armarPiezas(INICIALES, "inicial", ahora), historial: [], actualizado: ahora };
 }
 
-function ejemplo(): Datos {
-  const ahora = new Date().toISOString();
-  const ilustraciones: [string, number, string][] = [
-    ["Taza celeste con asa grande", 12000, "taza"],
-    ["Bowl rosado para el desayuno", 9500, "bowl"],
-    ["Florero alto verde agua", 21000, "florero"],
-    ["Plato playo con flores", 14000, "plato"],
-    ["Jarrita amarilla", 8500, "jarra"],
-    ["Maceta lila con platito", 16500, "maceta"],
-  ];
-  return {
-    piezas: [
-      ...armarPiezas(INICIALES, "inicial", ahora),
-      ...armarPiezas(
-        ilustraciones.map(([t, p, f]) => [t, p, `/demo/${f}.svg`]),
-        "ejemplo",
-        ahora,
-      ),
-    ],
-    historial: [{ fecha: ahora, texto: "Se cargó la tienda de prueba" }],
-    actualizado: ahora,
-  };
-}
-
 export async function leerTienda(tienda: Tienda): Promise<Datos> {
-  let datos: Datos | null;
-  try {
-    datos = await leerJSON<Datos>(ruta(tienda));
-  } catch (e) {
-    // En la demo un error de lectura no es grave: se vuelve a empezar.
-    if (tienda !== "demo") throw e;
-    console.error("[demo] No se pudo leer la tienda de prueba:", e);
-    datos = null;
-  }
-  if (tienda === "demo") {
-    const vieja =
-      !datos ||
-      Date.now() - new Date(datos.actualizado).getTime() > DEMO_REINICIO_MINUTOS * 60_000;
-    if (vieja) {
-      const nueva = ejemplo();
-      try {
-        await guardarJSON(ruta(tienda), nueva);
-      } catch (e) {
-        // Si el almacenamiento falla, la demo igual se muestra; el error queda en los logs.
-        console.error("[demo] No se pudo guardar la tienda de prueba:", e);
-      }
-      return nueva;
-    }
-  }
-  return datos ?? inicial();
-}
-
-export async function reiniciarDemo() {
-  await guardarJSON(ruta("demo"), ejemplo());
+  return (await leerJSON<Datos>(ruta(tienda))) ?? inicial();
 }
 
 export async function modificarTienda(

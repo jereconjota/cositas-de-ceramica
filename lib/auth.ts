@@ -25,7 +25,6 @@ export async function esLaTia() {
   return tokenValido((await cookies()).get(COOKIE)?.value);
 }
 
-// La demo la puede tocar cualquiera; la tienda real solo la tía.
 export async function puedeEditar(tienda: Tienda) {
-  return tienda === "demo" || (await esLaTia());
+  return tienda === "real" && (await esLaTia());
 }

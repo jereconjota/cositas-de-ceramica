@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { puedeEditar } from "@/lib/auth";
-import { modificarTienda, reiniciarDemo } from "@/lib/tienda";
+import { modificarTienda } from "@/lib/tienda";
 import { guardarFoto, borrarFoto } from "@/lib/storage";
 import { leerPrecio, formatearPrecio } from "@/lib/format";
 import type { Pieza, Tienda } from "@/lib/types";
@@ -11,21 +11,17 @@ export type Resultado = { ok: true; mensaje: string } | { ok: false; mensaje: st
 
 const MAX_FOTO = 6 * 1024 * 1024;
 
-function refrescar(tienda: Tienda) {
-  if (tienda === "real") {
-    revalidatePath("/");
-    revalidatePath("/tia");
-    revalidatePath("/historial");
-  } else {
-    revalidatePath("/demo", "layout");
-  }
+function refrescar(_tienda: Tienda) {
+  revalidatePath("/");
+  revalidatePath("/tia");
+  revalidatePath("/historial");
 }
 
 // Error con un mensaje pensado para mostrarle a la tía tal cual.
 class Aviso extends Error {}
 
 async function preparar(tienda: unknown): Promise<Tienda> {
-  if (tienda !== "real" && tienda !== "demo") throw new Aviso("No se encontró la tienda.");
+  if (tienda !== "real") throw new Aviso("No se encontró la tienda.");
   if (!(await puedeEditar(tienda))) throw new Aviso("No tenés permiso para cambiar esta página.");
   return tienda;
 }
@@ -158,13 +154,5 @@ export async function marcarVendida(
     return vendida
       ? `«${titulo}» ya no se ve en la página.`
       : `«${titulo}» se ve de nuevo en la página.`;
-  });
-}
-
-export async function reiniciarDemoAccion(): Promise<Resultado> {
-  return intentar(async () => {
-    await reiniciarDemo();
-    refrescar("demo");
-    return "La tienda de prueba volvió a empezar.";
   });
 }

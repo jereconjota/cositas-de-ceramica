@@ -2,12 +2,11 @@ import type { Pieza } from "@/lib/types";
 import { NOMBRE_TIA, NOMBRE_TIENDA } from "@/lib/config";
 import { Tarjeta } from "./Tarjeta";
 
-// Página pública: título, grilla y nada más. Sin carrito ni links, como pidió Norma.
-export function Vitrina({ piezas, aviso }: { piezas: Pieza[]; aviso?: React.ReactNode }) {
+// Página pública: título, grilla y un botón para escribirle a Norma. Sin carrito.
+export function Vitrina({ piezas }: { piezas: Pieza[] }) {
   const visibles = piezas.filter((p) => !p.vendida);
   return (
     <>
-      {aviso}
       <header className="cabecera">
         <h1>{NOMBRE_TIENDA}</h1>
         <p>Piezas hechas a mano por {NOMBRE_TIA}, una por una.</p>
@@ -24,7 +23,7 @@ export function Vitrina({ piezas, aviso }: { piezas: Pieza[]; aviso?: React.Reac
         )}
       </main>
       <footer className="pie">
-        <p>¿Te gustó alguna? Mandale un mensaje a {NOMBRE_TIA} con el nombre de la pieza.</p>
+        <p>¿Te gustó alguna? Tocá «💬 Escribile» y le mandás un mensaje a {NOMBRE_TIA}.</p>
       </footer>
     </>
   );

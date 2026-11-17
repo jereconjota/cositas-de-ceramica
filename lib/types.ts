@@ -1,4 +1,4 @@
-export type Tienda = "real" | "demo";
+export type Tienda = "real";
 
 export type Pieza = {
   id: string;

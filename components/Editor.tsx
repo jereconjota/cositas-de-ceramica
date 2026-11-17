@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition, type ReactNode } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import type { Pieza, Tienda } from "@/lib/types";
 import { NOMBRE_TIA, NOMBRE_TIENDA } from "@/lib/config";
 import { formatearPrecio, leerPrecio } from "@/lib/format";
@@ -48,11 +48,9 @@ function conFoto(foto: Blob, extra?: Record<string, string>) {
 export function Editor({
   tienda,
   piezas,
-  arriba,
 }: {
   tienda: Tienda;
   piezas: Pieza[];
-  arriba?: ReactNode;
 }) {
   const [dialogo, setDialogo] = useState<Dialogo | null>(null);
   const [aviso, setAviso] = useState<Aviso | null>(null);
@@ -128,7 +126,6 @@ export function Editor({
 
   return (
     <div className="modo-tia">
-      {arriba}
       <header className="cabecera">
         <p className="saludo">Hola {NOMBRE_TIA} 👋, esta es tu página</p>
         <h1>{NOMBRE_TIENDA}</h1>

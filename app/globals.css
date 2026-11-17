@@ -35,8 +35,7 @@ body {
 
 main,
 .cabecera,
-.pie,
-.cinta-demo {
+.pie {
   width: min(100% - 2rem, 1200px);
   margin-inline: auto;
 }
@@ -154,6 +153,36 @@ a {
   border: var(--borde);
   border-radius: 999px;
   padding: 0.1rem 0.9rem;
+}
+
+.precio-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.boton-escribir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 52px;
+  padding: 0.2rem 1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--blanco);
+  background: var(--marron);
+  border: var(--borde);
+  border-radius: 999px;
+  box-shadow: var(--sombra-chica);
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.boton-escribir:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
 }
 
 /* ---------- Botones ---------- */
@@ -453,41 +482,56 @@ a {
   flex: 1 1 14rem;
 }
 
-/* ---------- Demo e historial ---------- */
+/* ---------- Simulador de WhatsApp ---------- */
 
-.cinta-demo {
-  margin-top: 1rem;
-  background: var(--blanco);
-  border: 3px dashed var(--tinta);
+.simulador {
+  padding: 2rem 0 3rem;
+  max-width: 560px;
+}
+
+.simulador h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.chat {
+  margin: 1.5rem 0;
+  background: var(--arcilla);
+  border: var(--borde);
   border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+.chat-cabecera {
+  background: var(--marron);
+  color: var(--blanco);
+  font-weight: 700;
   padding: 0.8rem 1rem;
-  font-size: 1rem;
+  border-bottom: var(--borde);
 }
 
-.cinta-demo p {
-  margin: 0;
-}
-
-.cinta-enlaces {
+.chat-cuerpo {
+  padding: 1.5rem 1rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.2rem;
-  margin-top: 0.6rem;
-  font-weight: 700;
+  justify-content: flex-end;
 }
 
-.enlace-boton {
-  font: inherit;
-  font-weight: 700;
-  color: var(--tinta);
-  background: none;
-  border: none;
-  padding: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 2px;
-  cursor: pointer;
+.burbuja {
+  max-width: 85%;
+  margin: 0;
+  background: var(--blanco);
+  border: var(--borde);
+  border-radius: var(--radio) var(--radio) 4px var(--radio);
+  padding: 0.7rem 0.9rem;
+  font-size: 1.1rem;
 }
+
+.nota {
+  font-size: 0.95rem;
+}
+
+/* ---------- Historial ---------- */
 
 .historial {
   padding: 2rem 0 3rem;

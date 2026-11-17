@@ -92,7 +92,7 @@ export async function guardarFoto(carpeta: string, archivo: File): Promise<strin
 
 export async function borrarFoto(url: string) {
   // Las fotos que vienen con el proyecto viven en /public y no se borran.
-  if (url.startsWith("/demo/") || url.startsWith("/piezas/")) return;
+  if (url.startsWith("/piezas/")) return;
   try {
     const interna = url.startsWith("/fotos/") ? url.slice("/fotos/".length) : null;
     if (usaBlob) {
@@ -108,7 +108,7 @@ export async function borrarFoto(url: string) {
 // Para /fotos/...: devuelve la foto desde Blob privado o desde disco.
 export async function leerFoto(partes: string[]): Promise<ReadableStream | Buffer | null> {
   const nombre = partes.join("/");
-  if (!/^(real|demo)\/fotos\/[\w.-]+\.jpg$/.test(nombre)) return null;
+  if (!/^real\/fotos\/[\w.-]+\.jpg$/.test(nombre)) return null;
   if (usaBlob) {
     const resultado = await get(nombre, { access: await accesoDelStore() });
     return resultado?.stream ?? null;

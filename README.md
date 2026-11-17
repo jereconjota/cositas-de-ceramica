@@ -10,14 +10,15 @@ La página de la tía Norma. No hay panel: **la tía ve la misma página que sus
 | `/entrar?llave=TOKEN` | La tía (una sola vez) | Deja una cookie por un año y la manda a `/tia`. |
 | `/tia` | La tía | La misma página, con Agregar, "Ya la vendí" (con deshacer), cambiar nombre, precio o foto. |
 | `/historial` | El sobrino | Qué cambió la tía y cuándo. |
-| `/demo` | goncy / cualquiera | Tienda de prueba en modo tía, sin llave. Se reinicia sola cada 60 min. |
-| `/demo/publica` | goncy / cualquiera | La tienda de prueba vista como cliente. |
+| `/whatsapp` | Clientes | Lo que abre «💬 Escribile» mientras no haya número: simula el chat con el mensaje ya escrito. |
+
+Para probar el modo tía, el link `/entrar?llave=TOKEN` se manda por DM. No hay una tienda de prueba aparte: lo que se ve es la app funcionando de verdad.
 
 ## Deploy en Vercel
 
 1. Subí el repo a GitHub e importalo en Vercel.
 2. **Storage → Create → Blob** y conectalo al proyecto. Sirve tanto el sistema nuevo (`BLOB_STORE_ID`, con OIDC) como el viejo (`BLOB_READ_WRITE_TOKEN`), y tanto stores públicos como privados: el código detecta el tipo solo. Si querés forzarlo, definí `BLOB_ACCESS=public` o `private`.
-3. En **Environment Variables** agregá `TIA_TOKEN` con algo largo: `openssl rand -hex 24`.
+3. En **Environment Variables** agregá `TIA_TOKEN` con algo largo: `openssl rand -hex 24`. Opcional: `NEXT_PUBLIC_WHATSAPP_NUMERO` (ej: `5491112345678`) para que «Escribile» abra WhatsApp de verdad.
 4. Redeploy.
 
 ## El celular de la tía
