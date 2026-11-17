@@ -13,7 +13,6 @@ export default async function Demo() {
     <Editor
       tienda="demo"
       piezas={piezas}
-      enlacePublico="/demo/publica"
       arriba={
         <div className="cinta-demo">
           <p>

@@ -48,12 +48,10 @@ function conFoto(foto: Blob, extra?: Record<string, string>) {
 export function Editor({
   tienda,
   piezas,
-  enlacePublico,
   arriba,
 }: {
   tienda: Tienda;
   piezas: Pieza[];
-  enlacePublico: string;
   arriba?: ReactNode;
 }) {
   const [dialogo, setDialogo] = useState<Dialogo | null>(null);
@@ -131,18 +129,8 @@ export function Editor({
   return (
     <div className="modo-tia">
       {arriba}
-      <div className="saludo" role="note">
-        <p className="saludo-hola">Hola {NOMBRE_TIA} 👋</p>
-        <p>
-          Esta es tu página. <strong>Lo que ves acá es lo que ven tus clientes</strong>, solo que
-          vos tenés los botones.
-        </p>
-        <a className="boton boton-chico" href={enlacePublico} target="_blank" rel="noreferrer">
-          👀 Verla como un cliente
-        </a>
-      </div>
-
       <header className="cabecera">
+        <p className="saludo">Hola {NOMBRE_TIA} 👋, esta es tu página</p>
         <h1>{NOMBRE_TIENDA}</h1>
       </header>
 

@@ -36,7 +36,6 @@ body {
 main,
 .cabecera,
 .pie,
-.saludo,
 .cinta-demo {
   width: min(100% - 2rem, 1200px);
   margin-inline: auto;
@@ -218,6 +217,7 @@ a {
 /* ---------- Modo tía ---------- */
 
 .modo-tia {
+  display: flow-root;
   min-height: 100vh;
   padding-bottom: 9rem;
   /* Fondo de mesa de taller: se nota enseguida que es "su" página. */
@@ -226,22 +226,13 @@ a {
   background-size: 18px 18px;
 }
 
-.saludo {
-  margin-top: 1.25rem;
-  background: var(--blanco);
-  border: var(--borde);
-  border-radius: var(--radio);
-  box-shadow: var(--sombra);
-  padding: 1.1rem 1.2rem 1.3rem;
-  font-size: 1.15rem;
+.modo-tia .cabecera {
+  padding-top: 1.25rem;
 }
 
-.saludo p {
+.cabecera .saludo {
   margin: 0 0 0.9rem;
-}
-
-.saludo-hola {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 700;
 }
 

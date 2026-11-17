@@ -16,5 +16,5 @@ export default async function Tia() {
     );
   }
   const { piezas } = await leerTienda("real");
-  return <Editor tienda="real" piezas={piezas} enlacePublico="/" />;
+  return <Editor tienda="real" piezas={piezas} />;
 }
